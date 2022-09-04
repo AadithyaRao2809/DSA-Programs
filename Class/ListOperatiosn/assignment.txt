@@ -1,0 +1,262 @@
+
+// (1)
+void addAfter(LIST* p, int b, int data)
+{
+    if(p->head == NULL)
+        return 0;
+    
+    NODE* temp = p->head;
+    NODE* replace = NULL;
+
+    while(temp->next != NULL && replace!=NULL)
+    {
+        if(temp->info == b)
+            replace = temp;
+        else
+            temp = temp->next;
+    }
+    if(replace == NULL)
+        return 0;
+    
+    NODE* ele = (NODE*)malloc(sizeof(NODE));
+    ele->info = data;
+
+    ele->next = replace->next;
+    replace->next = ele;
+    return 1;
+}
+
+// (2)
+
+int delete(LIST* p, int key)
+{
+    if(p->head == NULL)
+        return 0;
+    NODE* temp = p->head;
+    NODE* delPrev = NULL;
+    if(temp->next == NULL)
+    {
+        if(temp->info == key)
+        {
+            p->head = NULL;
+            free(temp);
+            return 1;
+        }
+        return 0;
+    }
+
+    while(temp->next->next!=NULL && delPrev!=NULL)
+    {
+        if(temp->next->info == key)
+            delPrev = temp;
+        else
+            temp = temp->next;
+    }
+    if(delPrev == NULL)
+        return 0;
+    NODE* del = delPrev->next;
+
+    delPrev->next = del->next;
+    free(del);
+    return 1;
+}
+
+// (3)
+
+int replace(LIST* p, int b, int data)
+{
+    if(p->head == NULL)
+        return 0;
+    
+    NODE* temp = p->head;
+    NODE* replace = NULL;
+
+    while(temp->next != NULL && replace!=NULL)
+    {
+        if(temp->info == b)
+            replace = temp;
+        else
+            temp = temp->next;
+    }
+    if(replace == NULL)
+        return 0;
+    
+    remplace->info = data;
+    return 1;
+}
+
+// (4)
+
+int count(LIST* p, int data)
+{
+    if(p->head == NULL)
+        return 0;
+    NODE* temp = p->head;
+    int count = 0;
+    while(temp->next != NULL)
+    {
+        if(temp->info == data)
+            count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+// (5)
+
+int isSorted(LIST* p)
+{
+    if(p->head == NULL || p->head->next == NULL)
+        return 1;
+   NODE* temp = p->head;
+
+    int asc = 0;
+    if(temp->info < temp->next->info)
+        asc = 1;
+
+    if(asc)   
+    {
+        while(temp->next->next != NULL)
+        {
+            if(temp->info > temp->next->info)
+                return 0;
+            temp = temp->next;
+        }
+        return 1;
+    }
+    while(temp->next->next != NULL)
+    {
+        if(temp->info < temp->next->info)
+            return 0;
+        temp = tenmp->next;
+    }
+    return 1;
+
+}
+
+// (6)
+
+void removesDuplicates(LIST* p)
+{
+    if(p->head == NULL)
+        return;
+
+    NODE* temp = p->head;
+    NODE* dupe = temp->next;
+
+    
+    while(temp->next->next != NULL)
+    {
+        dupe = temp->next;
+        if(temp->info == dupe->info)
+        {
+            temp = dupe->next;
+            free(dupe);
+        }
+        temp = temp->next;
+    }
+
+    if(temp->info == dupe->info)
+    {
+        temp->next = NULL;
+        free(dupe);        
+    }    
+    
+}
+
+
+// (7)
+
+
+int insertLast(LIST *p, int n)
+{
+    NODE *ele = (NODE *)malloc(sizeof(NODE));
+    
+    ele->info = n;
+
+    NODE *temp = p->head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = ele;
+    ele->next = NULL;
+    return 1;
+}
+
+int deleteFront(LIST *p, int *e)
+{
+    *e = p->head->info;
+
+    NODE *temp = p->head;
+    p->head = p->head->next;
+
+    free(temp);
+    return 1;
+}
+
+void AlternatingSplit(LIST* source, LIST* odd, LIST* even)
+{
+    if(p->head == NULL)
+        return;
+    NODE* temp = p->head;
+    int data;
+
+    while(temp!=NULL)
+    {
+        temp = temp->next;
+        deleteFront(source, &data);
+        insertLast(odd, data);
+
+        if(temp == NULL)
+            return;
+        temp = temp->next;
+        deleteFront(source, &data);
+        insertLast(even, data);
+
+    }
+}
+
+
+// (8)
+
+8. Given two DLLs, merge their nodes together to make one doubly linked list, taking nodes alternately between the two lists. 
+So ShuffleMerge() with {1, 2, 3} and {7, 13, 1} should yield {1, 7, 2, 13, 3, 1}. If either list runs out, all the nodes should 
+be taken from the other list.
+
+
+
+
+void insertNode(DLL* p, int n)
+{
+    NODE* temp = malloc(sizeof(NODE));
+    NODE* cur = p->head;
+
+    for(int i=0; i<n-1 && cur->next!=NULL; i++)
+        cur = cur->next;
+
+    temp->next  = cur->next;
+    temp->prev = cur;
+    cur->next = temp;
+    temp->next->prev = temp;
+    
+    temp->info = n;
+
+} 
+
+int deleteNode(DLL* p, int* n)
+{
+    
+    NODE* temp = p->head;
+    NODE* del = temp->next;
+
+    if(temp->next == NULL)
+    {
+        free(temp->next);
+        temp->next = NULL;
+    }
+    
+    temp->next = del->next;
+
+}
+
+void mergeLists(DLL* l1, DLL* l2, DLL* merged)
