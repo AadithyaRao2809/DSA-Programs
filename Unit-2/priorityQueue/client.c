@@ -35,7 +35,7 @@ int main()
             if(deQueue(dataset, element))
                 printf("\n%d(%d) dequeued\n\n",element->info,element->pri);
             else
-                printf("\nQueue\n\n");
+                printf("\nQueue Empty\n\n");
             break;
 
         case 3:
