@@ -3,14 +3,6 @@
 
 #include "arrayList.h"
 
-
-
-
-
-
-
-
-
 int main()
 {
     int choice;

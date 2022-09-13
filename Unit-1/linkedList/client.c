@@ -2,7 +2,6 @@
 #include<stdlib.h>
 
 #include "linkedList.h"
-#define MAX 7
 
 
 int main()

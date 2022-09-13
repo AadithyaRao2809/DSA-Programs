@@ -20,8 +20,7 @@ int createList(SLL* pl){
         temp->next = pl->head;
         pl->head = temp;
 
-        printf("do you want to add and Element(y/n)");
-        fflush(stdin);
+        printf("do you want to add and Element(1/0)");
         scanf("%d",&choice);
         fflush(stdin);
 
