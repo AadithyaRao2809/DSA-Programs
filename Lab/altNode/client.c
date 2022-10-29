@@ -16,6 +16,7 @@ int main()
 
     printf("\nThe List after deltetion is\n");
     disp(&myList);
+    putchar('\n');
 
 
     

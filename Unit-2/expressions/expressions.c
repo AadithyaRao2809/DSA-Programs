@@ -10,7 +10,7 @@ int prcd(digit, digit);   // precidence of ops
 
 int main()
 {
-    char infix[100];
+    char infix[1000];
     char* post;
 
     printf("Enter infix Exp.: ");
@@ -21,7 +21,7 @@ int main()
     printf("%s\n",post);
      
 
-    // evaluate_postfix("23+");
+    evaluate_postfix(post);
 }
 
 
@@ -102,14 +102,21 @@ char* infix_to_postfix(char* infix)
                 }
                 if(infix[infInd] == '(')
                 {
-                    digit discard;
-                    pop(&ops, &discard);
-                    printf("%c discarded\n",discard.c);
+                    push(&ops,(digit)(infix[infInd]));
+                    printf("%c pushed\n",infix[infInd]);
                 }
                 else
                 {
-                    push(&ops,(digit)(infix[infInd]));
-                    printf("%c pushed\n",infix[infInd]);
+                    do
+                    {
+                        digit popped;
+                        pop(&ops,&popped);
+                        postfix[pstInd++] = popped.c;
+
+                        peep(&ops,&stackTop);
+                    }while(stackTop.c != '(');
+                    digit _;
+                    pop(&ops,&_);
                 }
                 
 

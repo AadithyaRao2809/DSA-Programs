@@ -35,7 +35,6 @@ void disp(SLL* pl){
     NODE* temp = pl->head;
     while(temp!=NULL){
         printf("%d ",temp->info);
-        printf("0");
         temp = temp->next;
     }
 }

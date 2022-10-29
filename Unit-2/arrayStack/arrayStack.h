@@ -3,7 +3,7 @@
 typedef struct stack
 {
     int s[MAX];
-    int size;
+    int top;
 }STACK;
 
 void init(STACK*);
