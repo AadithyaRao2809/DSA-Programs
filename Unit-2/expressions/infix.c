@@ -13,6 +13,8 @@ int prcd(char stk, char cur)    //1 to pop, 0 to push
         return 0;
         break;
     case ')':
+        if(stk=='(')
+            return 0;
         return 1;
         break;
     case '+':
@@ -20,59 +22,47 @@ int prcd(char stk, char cur)    //1 to pop, 0 to push
         if(stk == '(')
             return 0;
         return 1;
+        break;
     case '*':
     case '/':
-        if(stk == '*' || stk == '/')
-            return 1;
-        return 0;
+        if(stk == '(' || stk == '+' || stk == '-')
+            return 0;
+        return 1;
     }
 }
 
 
-char* inf_to_post(char* inf)
+char* inf_to_post(char* infix)
 {
-    int iI = 0;
 
     char stack[MAX];
-    int top = 0;
+    int top = -1;
 
-    int pI = 0;
-    char* post = (char*)calloc(sizeof(char),MAX);
+    int p = 0;
+    char* postfix = (char*)calloc(sizeof(char),MAX);
 
-    while(inf[iI] != '\0')
+    for(int i=0; infix[i]!='\0';i++)
     {
-        if(inf[iI]>='0' && inf[iI]<='9')
-            post[pI] = inf[iI];
-        else if(top == -1)
-            stack[++top] = inf[iI];
+        if(infix[i]>='0' && infix[i]<='9')
+            postfix[p++] = infix[i];
         else
         {
-            if(prcd(stack[top],inf[iI]))
-            {
-                if(inf[iI]!=')')
-                    post[pI++] = stack[top--]; 
-                else
-                {
-                    while(stack[top]!='(')
-                        post[pI++] = stack[top--];
-                    top--;
-                }
-            }
+            while(top!=-1 && prcd(stack[top],infix[i]))
+                postfix[p++] = stack[top--];
+            if(infix[i]==')')
+                stack[top--];
             else
-            {
-                stack[++top] = inf[iI];
-            }
+                stack[++top] = infix[i];
         }
-        iI++;
     }
 
     while(top!=-1)
-        post[pI++] = stack[top--];
-    post[pI] = '\0';
-    return post;
+        postfix[p++] = stack[top--];
+    postfix[p] = '\0';
+    return postfix;
 }
 
 int main()
 {
-    printf("hello %s",inf_to_post("2+3"));
+    printf("hello %s",inf_to_post("2+3/(5*6)"));
 }
